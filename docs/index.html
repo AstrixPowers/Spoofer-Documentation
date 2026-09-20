@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrix Spoofing Docs</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <style>
+        /* GLOBAL RESET & DARK BACKGROUND */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0b0b0b;        /* deep black background */
+            color: #e0e0e0;                    /* soft light text */
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* SMOOTH SCROLL & SELECTION */
+        ::selection {
+            background: #f500ff;
+            color: #000;
+        }
+
+        /* ---------- TYPOGRAPHY ---------- */
+        h1, h2, h3, h4, h5, h6 {
+            color: #f500ff;                    /* vibrant magenta for all headers */
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-top: 2.2em;
+            margin-bottom: 0.75em;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            border-bottom: 2px solid #f500ff;
+            padding-bottom: 0.4rem;
+            margin-top: 1.2em;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            border-bottom: 1px solid rgba(245, 0, 255, 0.4);
+            padding-bottom: 0.3rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            color: #f500ff;
+        }
+
+        /* DISTANCE LINES BETWEEN HEADERS AND CONTENT */
+        h1 + *,
+        h2 + *,
+        h3 + *,
+        h4 + *,
+        h5 + *,
+        h6 + * {
+            margin-top: 0.5rem;
+        }
+
+        /* Additional line separation for major sections */
+        h1, h2, h3, h4, h5, h6 {
+            position: relative;
+            padding-bottom: 0.35rem;
+        }
+
+        h1::after,
+        h2::after,
+        h3::after,
+        h4::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, #f500ff 0%, #f500ff 40%, transparent 100%);
+            margin-top: 0.7rem;
+            opacity: 0.5;
+        }
+
+        /* ---------- PARAGRAPHS & LISTS ---------- */
+        p {
+            margin-bottom: 1.25rem;
+            color: #d0d0d0;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.8rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* ---------- LINKS ---------- */
+        a {
+            color: #ff7bff;
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(245, 0, 255, 0.5);
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        a:hover {
+            color: #ffb3ff;
+            border-bottom-color: #ffb3ff;
+        }
+
+        /* ---------- CODE BLOCKS & INLINE ---------- */
+        code {
+            background: #1e1e1e;
+            color: #f0a0f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            font-family: 'Fira Code', 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #111;
+            border-left: 4px solid #f500ff;
+            padding: 1rem 1.2rem;
+            border-radius: 0 12px 12px 0;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: #e0e0e0;
+        }
+
+        /* ---------- IMAGES (responsive, subtle border) ---------- */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid #2a2a2a;
+            margin: 0.8rem 0;
+            display: block;
+        }
+
+        /* ---------- YOUTUBE IFRAMES — downsize & prevent overflow ---------- */
+        iframe {
+            display: block;
+            width: 100%;
+            max-width: 720px;          /* much smaller than original 1470px */
+            aspect-ratio: 16 / 9;
+            height: auto;
+            border-radius: 14px;
+            border: 1px solid #2a2a2a;
+            margin: 1.8rem 0 2rem 0;
+            background: #000;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ---------- FIGURES & CAPTIONS ---------- */
+        figure {
+            margin: 1.8rem 0;
+            text-align: center;
+        }
+
+        figcaption {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 0.3rem;
+            font-style: italic;
+        }
+
+        /* ---------- MARK / HIGHLIGHT ---------- */
+        mark {
+            background: rgba(245, 0, 255, 0.15);
+            color: #ffb3ff;
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+        }
+
+        /* ---------- RED WARNING TEXT (still visible on black) ---------- */
+        [style*="color:red"] {
+            color: #ff5e5e !important;
+            font-weight: 500;
+        }
+
+        /* ---------- YELLOW WARNING TEXT ---------- */
+        [style*="color:yellow"] {
+            color: #ffd966 !important;
+            font-weight: 500;
+        }
+
+        /* ---------- GREEN INFO TEXT ---------- */
+        [style*="color:green"] {
+            color: #6fcf97 !important;
+            font-weight: 500;
+        }
+
+        /* ---------- BLOCKQUOTE / IMPORTANT ---------- */
+        .important, .warning {
+            background: #1a0f1a;
+            border-left: 4px solid #f500ff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0 10px 10px 0;
+            margin: 1.5rem 0;
+        }
+
+        /* ---------- MISC SPACING ---------- */
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #f500ff, transparent);
+            margin: 2.5rem 0;
+            opacity: 0.3;
+        }
+
+        /* ---------- SCROLLBAR (dark) ---------- */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f500ff;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff5eff;
+        }
+
+        /* small responsive tweak */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.9rem; }
+            h2 { font-size: 1.6rem; }
+            iframe {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Spoofing partitions</h1>
+
+    <h4>Why would you spoof partitions</h4>
+    <p>In some games, such as Delta Force, spoofing partitions is required in order to bypass the HWID ban.</p>
+
+    <h4>Spoofing partitions</h4>
+    <p><mark style="color:red;">HAVING A USB WITH WINDOWS INSTALLATOR IS REQUIRED</mark></p>
+
+    <ol>
+        <li>Download this <a href="https://drive.google.com/file/d/1878IeuHbBbX107I72JjtLxqw6EoA-yXQ/view?usp=sharing">file</a></li>
+        <li>Run the downloaded file.
+            <p><mark style="color:yellow;">IT WILL BLUESCREEN, OR FREEZE AND THEN BLUESCREEN YOUR PC, DONT WORRY, THATS OK.</mark></p>
+        </li>
+        <li>After bluescreening boot up from your USB flash drive.</li>
+        <li>Upon booting up in the windows installator, click Repair your computer in the left bottom corner, or on newer versions of windows select Repair Windows option.
+            <figure>
+                <img src="https://2743043510-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2Fp3YPMq1CstulnFtd9Pbw%2Fuploads%2FoMNnoF1ZTP1bwD3tDbqu%2Frepair.png?alt=media&token=7729ba60-6562-415e-aa54-998d1defd14f" alt="Repair your computer">
+                <figcaption></figcaption>
+            </figure>
+        </li>
+        <li>Select "Troubleshoot" in the windows repairment tool.
+            <figure>
+                <img src="https://2743043510-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2Fp3YPMq1CstulnFtd9Pbw%2Fuploads%2FRGHFuxUngbPrZRsDGnxc%2Ftroubleshoot.png?alt=media&token=06bed5ab-3b30-443f-973a-8ec0c917a574" alt="Troubleshoot">
+                <figcaption></figcaption>
+            </figure>
+        </li>
+        <li>Click "Command prompt"
+            <figure>
+                <img src="https://2743043510-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2Fp3YPMq1CstulnFtd9Pbw%2Fuploads%2FMwTNuFtDZ0YjiRNQOLkM%2Fcmd.jpg?alt=media&token=ab761218-83e0-4b8c-aa9e-0816796a5b4c" alt="Command prompt">
+                <figcaption></figcaption>
+            </figure>
+        </li>
+        <li>Type these commands in the following order into the opened CMD:</li>
+    </ol>
+    <pre><code>diskpart
+list volume</code></pre>
+
+    <ol start="8">
+        <li>Now, find the volume, which has your windows on it and its format type is "NTFS", after finding it type:</li>
+    </ol>
+    <pre><code>select volume *volume number*</code></pre>
+    <p>Example:</p>
+    <pre><code>select volume 0</code></pre>
+    <p><mark style="color:yellow;">YOU HAVE TO TYPE YOUR VOLUME NUMBER WITHOUT THE * *</mark></p>
+
+    <ol start="9">
+        <li>Type this command:</li>
+    </ol>
+    <pre><code>assign letter=N</code></pre>
+
+    <ol start="10">
+        <li>Find the volume, INFO row of which has nothing in it, and which has the second biggest size out of them all, its format type should be FAT32
+            <p><mark style="color:green;">It is okay for the FAT32 volume to have label and letter assigned to it. It is also okay for the fat32 volume to be non-existent, just skip part 10 and 11 if you do not have one.</mark></p>
+            <p>Now type in:</p>
+        </li>
+    </ol>
+    <pre><code>select volume *volume number*</code></pre>
+    <p>Example:</p>
+    <pre><code>select volume 3</code></pre>
+
+    <ol start="11">
+        <li>Type in:</li>
+    </ol>
+    <pre><code>assign letter=Z</code></pre>
+
+    <ol start="12">
+        <li>Now type:</li>
+    </ol>
+    <pre><code>exit</code></pre>
+
+    <ol start="13">
+        <li>In case if you have FAT32 volume type in:</li>
+    </ol>
+    <pre><code>bcdboot N:\Windows /s Z: /f UEFI</code></pre>
+    <p>If you do not have one, then type in:</p>
+    <pre><code>bcdboot N:\Windows</code></pre>
+
+    <ol start="14">
+        <li>Now type in:</li>
+    </ol>
+    <pre><code>exit</code></pre>
+    <p>And proceed to boot into the windows.</p>
+
+    <ol start="15">
+        <li>After booting up into the windows, press WIN + R and type in msconfig, go to boot tab, and remove all the windowses aside the one that is marked as "Default OS"</li>
+    </ol>
+    <p>Thats it, now your partitions are spoofed.</p>
+
+    <hr>
+
+    <h1>Using spoofer</h1>
+
+    <h3>First steps</h3>
+    <p>By default our in-built spoofer is disabled in all our solutions, to learn how to use it, read this topic.</p>
+
+    <h4>Start of use</h4>
+    <p>To start the use of our spoofer read the guide on how to use the launcher parameters <a href="/fecuritydocs/main-content/launch-options.md">here.</a></p>
+    <p>After reading the parameters topic you may go on.</p>
+
+    <h3>Change of accounts/What to do after ban</h3>
+    <p>In case your account was blocked, or you need to change your account do this:</p>
+    <ol>
+        <li>Use Cleanup.bat, that file is placed in the same folder as the launcher.</li>
+        <li>Change -sid / -seed to any of the allowed numbers, that isnt equal to the previous one.</li>
+    </ol>
+
+    <h3>Creation and use of .bat file</h3>
+    <p>To use the in-built spoofer you have to create .bat file with parameters of launch.</p>
+    <ol>
+        <li>Create .txt file.</li>
+        <li>Type the -sid / -seed parameter in the .txt file.</li>
+        <li>Save .txt file, as .bat file.</li>
+        <li>Place .bat file in the same folder as launcher.</li>
+        <li>Run .bat file not as admin.</li>
+    </ol>
+    <p>If you didnt understand the text guide, then you can either read the <a href="/fecuritydocs/main-content/launch-options.md">more in-depth guide</a>, or watch our video-guide.</p>
+
+    <iframe src="https://www.youtube.com/embed/lUmi229tMPM?si=azspoXLhu2a54bLb" title="Spoofer video guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</body>
+</html>
